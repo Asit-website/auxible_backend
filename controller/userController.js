@@ -42,6 +42,16 @@ const generateRefreshToken = async (userId) => {
 
 })
 
+export const getUserOwndetail = async(req ,res)=>{
+   const {userId} = req.params;
+   const userDetail = await User.findById(userId).populate("PermissionRole");
+
+   return res.status(200).json({
+    status:true , 
+    data:userDetail
+   })
+}
+
 function formatDate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
@@ -386,21 +396,22 @@ export const updateProfile = asyncHandler(async (req, res) => {
       toDate,
       fromDate,
       numberOfMonth,
-      Jobdescription,
       SalaryPay,
-      SalaryBankName,
+      Jobdescription,
       BeneficiaryName,
+      SalaryBankName,
       BankIfsc,
       AccountNumber,
       confirmAccount,
-      Branch , dob , 
-     updateProfile: false,  
+      Branch ,
+      updateProfile: false,  
+       dob , 
       
       
     });
     const user = await User.findByIdAndUpdate(req.user._id, obj, {
       new: true,
-    }).select("-password");
+    }).select("-password").populate("PermissionRole");
     return res
       .status(200)
       .json(new ApiResponse(200, user, "Updated User Details Successfully"));
@@ -484,8 +495,11 @@ export const UpdateUser = asyncHandler(async (req, res) => {
       AccountNumber,
       confirmAccount,
       Branch,
+      PermissionRole,
+      employeeCode ,
     } = req.body;
     const { userId } = req.params;
+
 
     // const profileImageLocalPath = req.file?.path;
     // if (!profileImageLocalPath) {
@@ -545,8 +559,12 @@ export const UpdateUser = asyncHandler(async (req, res) => {
       AccountNumber,
       confirmAccount,
       Branch,
+      employeeCode,
+      PermissionRole: PermissionRole === "Select Role" ? null : PermissionRole
     });
 
+
+    
     const user = await User.findByIdAndUpdate(userId, updateObj, {
       new: true,
     }).select("-password");
