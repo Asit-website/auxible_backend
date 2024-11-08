@@ -183,7 +183,7 @@ Your account has been successfully created and below are your login details:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.kusheldigi.com/login`}
+Login Here; ${`https://hrms.auxibleindia.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -205,7 +205,7 @@ Your account has been successfully created and below are your login details:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.kusheldigi.com/login`}
+Login Here; ${`https://hrms.auxibleindia.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -351,7 +351,7 @@ Your account has been successfully created and below are your login details:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.kusheldigi.com/login`}
+Login Here; ${`https://hrms.auxibleindia.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -374,7 +374,7 @@ Your account has been successfully created and below are your login details:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.kusheldigi.com/login`}
+Login Here; ${`https://hrms.auxibleindia.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -839,7 +839,7 @@ export const postAssets = asyncHandler(async (req, res) => {
     <div>Additional Product: ${additonal}</div>
     <div>description: ${description}</div>
        <div>To accept, click the link below:</div>
-    <a href="https://hrms.kusheldigi.com/accept/${apprisal?._id}">Accept Assets</a>
+    <a href="https://hrms.auxibleindia.com/accept/${apprisal?._id}">Accept Assets</a>
     </div>`);
 
 
