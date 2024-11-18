@@ -495,8 +495,7 @@ export const UpdateUser = asyncHandler(async (req, res) => {
       AccountNumber,
       confirmAccount,
       Branch,
-      PermissionRole,
-      employeeCode ,
+      PermissionRole
     } = req.body;
     const { userId } = req.params;
 
@@ -559,7 +558,6 @@ export const UpdateUser = asyncHandler(async (req, res) => {
       AccountNumber,
       confirmAccount,
       Branch,
-      employeeCode,
       PermissionRole: PermissionRole === "Select Role" ? null : PermissionRole
     });
 

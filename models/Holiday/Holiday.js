@@ -20,7 +20,7 @@ const sendHolidayNotificationEmail = async (holiday, users) => {
           <div>Start Date: ${startDate}</div>
           <div>End Date: ${endDate}</div>
           <div>To accept, click the link below:</div>
-          <a href="https://hrms.auxibleindia.com/accept/${holiday._id}">Accept Holiday</a>
+          <a href="https://hrms.kusheldigi.com/accept/${holiday._id}">Accept Holiday</a>
         </div>
       `);
     }
