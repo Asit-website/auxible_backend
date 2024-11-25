@@ -32,7 +32,8 @@ export const createLead = async (req, res) => {
        State, 
        ZipCode ,
         Country ,
-        LeadSource
+        LeadSource,
+        LeadStatus
     } = req.body;
 
 
@@ -50,7 +51,8 @@ export const createLead = async (req, res) => {
        State, 
        ZipCode ,
         Country ,
-        LeadSource
+        LeadSource ,
+        LeadStatus
     });
 
     return res.status(200).json({
@@ -835,7 +837,8 @@ export const editLead = async (req, res) => {
        State, 
        ZipCode ,
         Country ,
-        LeadSource
+        LeadSource,
+        LeadStatus
     } = req.body;
 
    
@@ -860,7 +863,8 @@ export const editLead = async (req, res) => {
          State, 
          ZipCode ,
           Country ,
-          LeadSource
+          LeadSource,
+          LeadStatus
       },
       { new: true }
     );
