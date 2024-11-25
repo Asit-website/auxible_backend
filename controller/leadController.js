@@ -35,6 +35,7 @@ export const createLead = async (req, res) => {
         LeadSource
     } = req.body;
 
+
     const leadDetail = await Lead.create({
       LeadOwner,
       image,
