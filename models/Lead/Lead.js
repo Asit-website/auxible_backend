@@ -21,6 +21,7 @@ const mySchema = new mongoose.Schema({
   Country: String,
   image: String,
   LeadSource: String,
+  LeadStatus: String,
 
   isOpen: {
     type: String,
