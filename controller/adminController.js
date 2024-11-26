@@ -171,14 +171,14 @@ export const CreateNewHr = asyncHandler(async (req, res) => {
 
     let employeeCode1 = makeid(7);
 
-    // <div>Employee ID: KDS${employeeCode1}</div>
+    // <div>Employee ID: ${employeeCode1}</div>
     // <div>Password: ${plainTextPassword}</div>
     const message = `<div>
           Welcome aboard! We are excited to have you as a part of our team and introduce you to our HRMS system. Here, you’ll find a centralized platform for managing essential HR-related tasks and accessing important information.
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: KDS${employeeCode1} 
+- employeeCode: ${employeeCode1} 
 - Temporary ${plainTextPassword}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
@@ -200,7 +200,7 @@ Auxible India
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: KDS${employeeCode1} 
+- employeeCode: ${employeeCode1} 
 - Temporary ${plainTextPassword}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
@@ -346,7 +346,7 @@ export const CreateNewUser = asyncHandler(async (req, res) => {
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: KDS${employeeCode} 
+- employeeCode: ${employeeCode} 
 - Temporary ${password}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
@@ -369,7 +369,7 @@ Auxible India
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: KDS${employeeCode} 
+- employeeCode: ${employeeCode} 
 - Temporary ${password}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
