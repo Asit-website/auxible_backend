@@ -630,7 +630,9 @@ export const GetDesiUser = async (req, res) => {
         "Business Development Manager",
         "Manager",
         "Field Marketing Executive",
-        "Business Development Executive"
+        "Business Development Executive",
+        "ASST. SALES MANAGER",
+        "HR-ADMIN"
       ],
     },
   });
@@ -1140,10 +1142,10 @@ export const GetDesiUser1 = async (req, res) => {
   const users = await User.find({
     designation: {
       $in: [
-        "CEO",
-        "Intern Digital Marketing",
-        "Business Development Manager",
-        "Manager",
+        // "CEO",
+        "ASST. SALES MANAGER",
+        "HR-ADMIN",
+        // "Manager",
       ],
     },
   });
