@@ -7,6 +7,7 @@ import { SendEmail } from "../utils/SendEmail.js";
 import ActivityTracker from "../models/ActivityTracker/ActivityTracker.js";
 import crypto from "crypto";
 import fs from "fs";
+import bcrypt from "bcryptjs";
 import { removeUndefined } from "../utils/util.js";
 import Leave from "../models/Leave/Leave.js";
 
@@ -314,7 +315,6 @@ export const updateProfile = asyncHandler(async (req, res) => {
       mobile,
       email,
       email1,
-      password,
       gmail,
       department,
       designation,
@@ -353,19 +353,22 @@ export const updateProfile = asyncHandler(async (req, res) => {
       AccountNumber,
       confirmAccount,
       Branch,
-      image , 
-      dob
+      dob , 
+      updatePassword
     } = req.body;
 
+    let updatepasshash = undefined;
+    
+     if(updatePassword){
+        updatepasshash = await bcrypt.hash(updatePassword , 10);
+      }
 
 
     const obj = removeUndefined({
       fullName,
       mobile,
       email,
-      // profileImage: profileImage?.url,
       email1,
-      password,
       gmail,
       department,
       designation,
@@ -406,6 +409,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
       Branch ,
       updateProfile: false,  
        dob , 
+       password: updatepasshash
       
       
     });
