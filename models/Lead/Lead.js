@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const mySchema = new mongoose.Schema({
-  LeadOwner: {
+  LeadOwner: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-  },
+  }],
   budget: String,
   leadType: String,
   name: String,

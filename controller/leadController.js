@@ -36,9 +36,11 @@ export const createLead = async (req, res) => {
         LeadStatus
     } = req.body;
 
+    const leadOwners = Array.isArray(LeadOwner) ? LeadOwner : [LeadOwner];
+
 
     const leadDetail = await Lead.create({
-      LeadOwner,
+      LeadOwner:leadOwners,
       image,
       leadType,
       budget,
@@ -87,6 +89,27 @@ export const OfferLetterDocs = async(req ,res)=>{
       message:"internal server error "
     })
    }
+}
+
+export const ShareLead = async(req ,res)=>{
+  const {leadId , shareEmp} = req.body;
+   
+
+   await Lead.updateOne(
+    { _id: leadId },
+    {
+      $addToSet: {
+        LeadOwner: { $each: shareEmp }, 
+      },
+    }
+  );
+
+  return res.status(200).json({
+    status: true,
+    message: "Lead shared successfully.",
+  });
+    
+
 }
 
 export const SaveRelivingLetter = async(req ,res)=>{

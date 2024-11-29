@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {createLead ,getAllLead,getAllLead3 , SaveRelivingLetter  , saveLORLetter, saveLetter1Api , saveOfferLetterInter ,saveExperienceLetter ,  GetLeadByUser , GetDesiUser, editLeadStatus,getAllLead2, postImage,deleteLeads , editLead, editLeadNote , GetAllLeadByAdmin , GetLeadById, CreateLeadStatus ,getLeadStatus , getLeadSource ,CreateLeadSource  , UpdateLeadStatus ,UpdateLeadSource , CreateLeadNote , UpdateLeadNote , DeleteLeadNote , GetNoteById , GetOpenLeads, GetDesiUser1 , PostQuotationForm , PostProposalForm,  GetQuotationApi , DeleteQuotationapi ,deletePropapi , GetUserLetter , UpdateQuotationForm , UpdateProposalForm , OfferLetterDocs , changeOfferLetterPer , changeRelivingLetterPer , changeExperienceLetterPer , 
+import {createLead ,getAllLead,getAllLead3 , SaveRelivingLetter  , saveLORLetter, saveLetter1Api , saveOfferLetterInter ,saveExperienceLetter ,  GetLeadByUser , GetDesiUser, editLeadStatus,getAllLead2, postImage,deleteLeads , editLead, editLeadNote , GetAllLeadByAdmin , GetLeadById, CreateLeadStatus ,getLeadStatus , getLeadSource ,CreateLeadSource  , UpdateLeadStatus ,UpdateLeadSource , CreateLeadNote , UpdateLeadNote , DeleteLeadNote , GetNoteById , GetOpenLeads, GetDesiUser1 , PostQuotationForm , PostProposalForm,  GetQuotationApi , DeleteQuotationapi ,deletePropapi , GetUserLetter , UpdateQuotationForm , UpdateProposalForm , OfferLetterDocs , changeOfferLetterPer , changeRelivingLetterPer , changeExperienceLetterPer , ShareLead , 
 } from "../controller/leadController.js"
 import { deleteExpense , getExpense , CreateExpense } from "../controller/expenseController.js";
  
@@ -9,6 +9,7 @@ router.post("/createLead",createLead );
 router.get("/getLeadById/:id" , GetLeadById);
 router.get("/getOpenLeads/:id" , GetOpenLeads);
 router.post("/createExpense" , CreateExpense);
+router.post("/shareLead" , ShareLead);
 router.get("/getLeadByUser/:id" , GetLeadByUser);
 router.get("/getDesiUser" , GetDesiUser);
 router.get("/getDesiUser1",GetDesiUser1);
