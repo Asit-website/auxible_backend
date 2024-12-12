@@ -6,7 +6,7 @@ const mySchema = new mongoose.Schema({
    } , 
    Date:{
     type:Date , 
-    default:Date.now(),
+    default: Date.now,
    },
    Note:{
     type:String,
