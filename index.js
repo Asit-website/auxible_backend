@@ -18,13 +18,9 @@ import notification from "./router/notification.js"
 import clock from "./router/clockRouter.js"
 import award from "./router/awardRouter.js"
 import lead from "./router/leadRouter.js"
-
-
 import attendanceRouter from "./router/attendanceRouter.js";
 import authRouter from "./router/authRouter.js";
 import systemRouter from "./router/systemRouter.js";
-// import apprisalRouter from "./router/apprisalRouter.js"
-// import indicatorRouter from "./router/indicatorRouter.js";
 import { connectDb } from "./db/user_conn.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
@@ -36,7 +32,7 @@ import User from "./models/User/User.js";
 import ActivityTracker from "./models/ActivityTracker/ActivityTracker.js";
 import payslip from "./router/paySlipRouter.js";
 import PermissionRouter from "./router/PermissionRouter.js";
-// import Trainer from "./models/Trainer/Trainer.js";
+import Quotation from "./router/Quotation.js";
 
 dotenv.config();
 const port = process.env.PORT;
@@ -44,13 +40,6 @@ const port = process.env.PORT;
 //Database Connection
 connectDb();
 
-// app.use(
-//   cors({
-//     origin: process.env.ORIGIN_URL,
-//     credentials: true,
-//     methods: ["get", "post", "delete", "put"],
-//   })
-// );
 app.use(cors());
 
 app.use(express.json({limit:'10mb'}));
@@ -86,13 +75,12 @@ app.use("/award" ,award);
 app.use("/lead" , lead);
 app.use("/payroll" , payrollRouter);
 app.use("/openActivity" , openActivity);
-
 app.use("/attendance", attendanceRouter);
 app.use("/auth", authRouter);
 app.use("/system", systemRouter); 
 app.use("/payslip" , payslip);
-
 app.use("/permission" , PermissionRouter);
+app.use("/quotation" , Quotation);
 
 const task = cron.schedule('55 23 * * *', async () => {
 

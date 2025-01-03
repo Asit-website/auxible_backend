@@ -1,35 +1,31 @@
-import mongoose, { mongo } from "mongoose";
-
+import mongoose from "mongoose";
 
 const RowSchema = new mongoose.Schema({
-  application: {
+    area: {
     type: String,
 
-  },
-  brand: {
-    type: String,
-  
-  },
-  model: {
-    type: String,
- 
   },
   description: {
     type: String,
-  
   },
   qty: {
-    type: Number,
-   
+    type: String,
+ 
   },
-  unitPrice: {
-    type: Number,
+  price: {
+    type: String,
   
   },
   amount: {
     type: Number,
    
   },
+  
+  unit: {
+    type: Number,
+   
+  },
+  
 });
 
 const mySchema = new mongoose.Schema({
@@ -44,10 +40,13 @@ const mySchema = new mongoose.Schema({
   quotationDate: {
     type: Date,
   },
+  GSTNNo: {
+    type: String,
+  },
   rows: [RowSchema], 
   
 }, { timestamps: true }); 
 
-const Quatation = mongoose.model("Quatation", mySchema);
+const Quatation2 = mongoose.model("Quatation", mySchema);
 
-export default Quatation;
+export default Quatation2;

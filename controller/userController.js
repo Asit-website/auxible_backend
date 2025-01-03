@@ -7,9 +7,9 @@ import { SendEmail } from "../utils/SendEmail.js";
 import ActivityTracker from "../models/ActivityTracker/ActivityTracker.js";
 import crypto from "crypto";
 import fs from "fs";
-import bcrypt from "bcryptjs";
 import { removeUndefined } from "../utils/util.js";
 import Leave from "../models/Leave/Leave.js";
+import bcrypt from "bcryptjs";
 
 const generateRefreshToken = async (userId) => {
   try {
@@ -354,20 +354,23 @@ export const updateProfile = asyncHandler(async (req, res) => {
       confirmAccount,
       Branch,
       dob , 
-      updatePassword
+      updatePassword,
+      profileImage
     } = req.body;
 
-    let updatepasshash = undefined;
-    
-     if(updatePassword){
-        updatepasshash = await bcrypt.hash(updatePassword , 10);
-      }
 
+    // const genpass = await bcrypt.hash(password, 10);
+    let updatepasshash=""
+
+    if(updatePassword){
+       updatepasshash = await bcrypt.hash(updatePassword , 10);
+    }
 
     const obj = removeUndefined({
       fullName,
       mobile,
       email,
+      profileImage , 
       email1,
       gmail,
       department,
@@ -409,13 +412,15 @@ export const updateProfile = asyncHandler(async (req, res) => {
       Branch ,
       updateProfile: false,  
        dob , 
-       password: updatepasshash
+       password:updatepasshash
       
       
     });
+
     const user = await User.findByIdAndUpdate(req.user._id, obj, {
       new: true,
     }).select("-password").populate("PermissionRole");
+
     return res
       .status(200)
       .json(new ApiResponse(200, user, "Updated User Details Successfully"));

@@ -27,14 +27,16 @@ const generateRefreshToken = async (userId) => {
 export const login = asyncHandler(async (req, res) => {
   const { email, password, employeeCode } = req.body;
 
-  console.log("user" , employeeCode);
-
-
-  const user = email ? await User.findOne({ email }).populate("PermissionRole") : await User.findOne({ employeeCode: employeeCode }).populate("PermissionRole");
+  const user = email
+    ? await User.findOne({ email }).populate("PermissionRole")
+    : await User.findOne({ employeeCode: employeeCode.slice(3) }).populate("PermissionRole");
     
   if (!user) {
     throw new ApiError(404, "User not found");
   }
+
+  console.log("user" , user);
+
 
   const isDeactivated = user.isDeactivated === "Yes";
 

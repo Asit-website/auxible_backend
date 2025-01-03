@@ -171,19 +171,19 @@ export const CreateNewHr = asyncHandler(async (req, res) => {
 
     let employeeCode1 = makeid(7);
 
-    // <div>Employee ID: ${employeeCode1}</div>
+    // <div>Employee ID: KDS${employeeCode1}</div>
     // <div>Password: ${plainTextPassword}</div>
     const message = `<div>
           Welcome aboard! We are excited to have you as a part of our team and introduce you to our HRMS system. Here, you’ll find a centralized platform for managing essential HR-related tasks and accessing important information.
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: ${employeeCode1} 
+- employeeCode: KDS${employeeCode1} 
 - Temporary ${plainTextPassword}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.auxibleindia.com/`}
+Login Here; ${`https://hrms.kusheldigi.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -191,7 +191,7 @@ If you have any questions or need assistance, please don’t hesitate to reach o
 Welcome once again!
 <br/>
 Best Regards, 
-Auxible India
+Kushel Digi Solutions
      </div>
      `;
     const html = `
@@ -200,12 +200,12 @@ Auxible India
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: ${employeeCode1} 
+- employeeCode: KDS${employeeCode1} 
 - Temporary ${plainTextPassword}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.auxibleindia.com/`}
+Login Here; ${`https://hrms.kusheldigi.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -213,7 +213,7 @@ If you have any questions or need assistance, please don’t hesitate to reach o
 Welcome once again!
 <br/>
 Best Regards, 
-Auxible India
+Kushel Digi Solutions
      </div>
      `;
 
@@ -334,13 +334,12 @@ export const CreateNewUser = asyncHandler(async (req, res) => {
       AccountNumber,
       confirmAccount,
       Branch,
-      employeeType,
-      PermissionRole ,
+      employeeType , 
+      PermissionRole , 
       employeeCode
     } = req.body;
 
-    
-
+    // const employeeCode = makeid(7);
 
     const message = `
     <div>
@@ -348,12 +347,12 @@ export const CreateNewUser = asyncHandler(async (req, res) => {
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: ${employeeCode} 
+- employeeCode: KDS${employeeCode} 
 - Temporary ${password}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.auxibleindia.com/`}
+Login Here; ${`https://hrms.kusheldigi.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -361,7 +360,7 @@ If you have any questions or need assistance, please don’t hesitate to reach o
 Welcome once again!
 <br/>
 Best Regards, 
-Auxible India
+Kushel Digi Solutions
      </div>
   `;
 
@@ -371,12 +370,12 @@ Auxible India
 <br/>
 Your account has been successfully created and below are your login details:
 <br/>
-- employeeCode: ${employeeCode} 
+- employeeCode: KDS${employeeCode} 
 - Temporary ${password}:
 <br/>
 Please use the link below to log in for the first time. For security purposes, we recommend changing your password after your initial login.
 <br/>
-Login Here; ${`https://hrms.auxibleindia.com/`}
+Login Here; ${`https://hrms.kusheldigi.com/login`}
 
 <br/>
 If you have any questions or need assistance, please don’t hesitate to reach out to our support team.
@@ -440,7 +439,7 @@ Kushel Digi Solutions
       AccountNumber,
       confirmAccount,
       Branch,
-      EmployeeType: employeeType,
+      EmployeeType: employeeType ,
       PermissionRole: (PermissionRole === "Select Role" || PermissionRole === "") ? null : PermissionRole
     });
 
@@ -842,17 +841,17 @@ export const postAssets = asyncHandler(async (req, res) => {
     <a href="https://hrms.kusheldigi.com/accept/${apprisal?._id}">Accept Assets</a>
     </div>`);
 
-  const title = `New Assets`;
+    const title = `New Assets`;
 
-  const user = users?._id;
-
-  const anss = await Notification.create({
-    title,
-    description,
-    user: [user],
-  });
-
-
+    const user = users?._id; 
+    
+    const anss = await Notification.create({
+        title,
+        description,
+        user: [user], 
+    });
+    
+    
 
   return res
     .status(200)
@@ -1000,7 +999,7 @@ export const postAnnouncement = asyncHandler(async (req, res) => {
   // retreiving all the user of same department and designation 
   if (Employee === "All Employee") {
 
-    const users = await User.find({ department: Department });
+    const users = await User.find({ department: Department , isDeactivated:"No"  });
 
     for (const user of users) {
 
@@ -1150,8 +1149,8 @@ export const postTermination = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1159,7 +1158,7 @@ export const postTermination = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users.email}`,
     subject: "Regarding Termination",
     html: `<div>
@@ -1221,8 +1220,8 @@ export const updateTermination = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1230,7 +1229,7 @@ export const updateTermination = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users.email}`,
     subject: "Regarding Termination",
     html: `<div>
@@ -1274,8 +1273,8 @@ export const postWarning = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1349,8 +1348,8 @@ export const updateWarning = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1358,7 +1357,7 @@ export const updateWarning = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Warning",
     html: `<div>
@@ -1400,8 +1399,8 @@ export const postComplain = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1409,7 +1408,7 @@ export const postComplain = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Warning",
     html: `<div>
@@ -1475,8 +1474,8 @@ export const updateComplain = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1484,7 +1483,7 @@ export const updateComplain = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Warning",
     html: `<div>
@@ -1525,15 +1524,15 @@ export const postResignation = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
     }
   });
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Resignation",
     html: `<div>
@@ -1594,8 +1593,8 @@ export const updateResignation = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1603,7 +1602,7 @@ export const updateResignation = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Resignation",
     html: `<div>
@@ -1644,8 +1643,8 @@ export const postPromotion = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1653,7 +1652,7 @@ export const postPromotion = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Promotion",
     html: `<div>
@@ -1706,8 +1705,8 @@ export const updatePromotion = asyncHandler(async (req, res) => {
   let transporter = createTransport({
     host: "smtpout.secureserver.net",
     auth: {
-      user: "info@auxibleindia.com",
-      pass: "info@1234"
+      user: "info@kusheldigi.com",
+      pass: "info@kushel12345"
     },
     tls: {
       rejectUnauthorized: false // Temporarily bypass certificate validation
@@ -1715,7 +1714,7 @@ export const updatePromotion = asyncHandler(async (req, res) => {
   });
 
   let info = await transporter.sendMail({
-    from: 'Kushel Digi Solutions" <info@auxibleindia.com>',
+    from: 'Kushel Digi Solutions" <info@kusheldigi.com>',
     to: `${users1.email}`,
     subject: "Regarding Promotion",
     html: `<div>
@@ -2059,7 +2058,13 @@ export const createHoliday = asyncHandler(async (req, res) => {
 
     const { holidayName, startDate, endDate } = req.body;
 
-    const users = await User.find({});
+    const users = await User.find({
+      isDeactivated:{
+        $in:[
+          "No"
+        ]
+      }
+    })
 
     //  Extract email addresses from the retrieved user 
     const emailList = users.map(user => user.email);
@@ -2326,22 +2331,22 @@ export const deleteLeads = asyncHandler(async (req, res) => {
 });
 
 export const closeLead = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; 
 
   try {
-    const currentDate = new Date().toISOString();
-
+    const currentDate = new Date().toISOString(); 
+    
     const lead = await Lead.findByIdAndUpdate(id, {
       status: 'Close',
       closeDate: currentDate,
-    }, { new: true });
+    }, { new: true }); 
 
     if (!lead) {
-      return res.status(404).json({ status: false, message: 'Lead not found' });
+      return res.status(404).json({ status:false, message: 'Lead not found' });
     }
 
     return res.status(200).json({
-      status: true,
+      status:true ,
       lead
     });
   } catch (error) {
@@ -2353,26 +2358,26 @@ export const getAllCloseLead = async (req, res) => {
 
   try {
 
-    const ans = await Lead.find({ status: "Close" }).sort({ Date: -1 });
-    return res.status(200).json({
-      status: ans,
-
-    })
+   const  ans = await Lead.find({status:"Close"}).sort({Date:-1});
+   return res.status(200).json({
+    status:ans , 
+    
+   })
   } catch (error) {
     return res.status(500).json({ message: 'Server error', error });
   }
 };
 
 export const getAllCloseLead2 = async (req, res) => {
-
-  const { id } = req.body;
+  
+  const {id} =req.body;
 
   try {
 
-    const ans = await Lead.find({ status: "Close", LeadOwner: id }).sort({ Date: -1 });
-    return res.status(200).json({
-      status: ans,
-    })
+   const  ans = await Lead.find({status:"Close" , LeadOwner:id}).sort({Date:-1});
+   return res.status(200).json({
+    status:ans , 
+   })
   } catch (error) {
     return res.status(500).json({ message: 'Server error', error });
   }
@@ -2403,7 +2408,7 @@ export const getTodayLead = async (req, res) => {
 
 export const getTodayLead2 = async (req, res) => {
   try {
-    const { id } = req.body;
+    const {id} = req.body;
     const startOfToday = new Date();
     startOfToday.setUTCHours(0, 0, 0, 0);
 
@@ -2411,7 +2416,7 @@ export const getTodayLead2 = async (req, res) => {
     endOfToday.setUTCHours(23, 59, 59, 999);
 
     const ans = await Lead.find({
-      createAt: { $gte: startOfToday, $lte: endOfToday },
+      createAt: { $gte: startOfToday, $lte: endOfToday } , 
       LeadOwner: id
     });
 

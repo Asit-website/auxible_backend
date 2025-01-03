@@ -9,6 +9,7 @@ import LeadNote from "../models/LeadNotes.js";
 import Quatation from "../models/Quatation/Quatation.js";
 import Proposal from "../models/Proposal/Proposal.js";
 import OfferLetter from "../models/OfferLetter.js";
+import FreelencerOffer from "../models/FreelencerOffer.js";
 import LORLetter from "../models/LORLetter.js";
 import Letter1 from "../models/Letter1.js";
 import RelivingLetter from "../models/Reliving.js";
@@ -18,43 +19,65 @@ import InternLetter from "../models/InternLetter.js";
 export const createLead = async (req, res) => {
   try {
     const {
-   
-      image,
       LeadOwner,
-      leadType,
-      budget,
-      name,
-      Mobile,
+      image,
+      Company,
+      FirstName,
+      LastName,
+      Title,
       Email,
-      date,
-      Street ,
-      City ,
-       State, 
-       ZipCode ,
-        Country ,
-        LeadSource,
-        LeadStatus
+      Phone,
+      Fax,
+      Mobile,
+      Website,
+      LeadSource,
+      NoOfEmployee,
+      Industry,
+      LeadStatus,
+      AnnualRevenue,
+      Rating,
+      EmailOptOut,
+      SkypeID,
+      SecondaryEmail,
+      Twitter,
+      Street,
+      City,
+      State,
+      ZipCode,
+      Country,
+      DescriptionInfo,
+      date
     } = req.body;
 
-    const leadOwners = Array.isArray(LeadOwner) ? LeadOwner : [LeadOwner];
-
-
     const leadDetail = await Lead.create({
-      LeadOwner:leadOwners,
-      image,
-      leadType,
-      budget,
-      name,
-      Mobile,
+      LeadOwner: LeadOwner,
+      Company: Company,
+      FirstName,
+      LastName,
+      Title,
       Email,
-      date,
-      Street ,
-      City ,
-       State, 
-       ZipCode ,
-        Country ,
-        LeadSource ,
-        LeadStatus
+      Phone,
+      Fax,
+      Mobile,
+      Website,
+      LeadSource,
+      NoOfEmployee,
+      Industry,
+      LeadStatus,
+      AnnualRevenue,
+      Rating,
+      EmailOptOut,
+      SkypeID,
+      SecondaryEmail,
+      Twitter,
+      Street,
+      City,
+      State,
+      ZipCode,
+      Country,
+      DescriptionInfo,
+      image,
+      date
     });
 
     return res.status(200).json({
@@ -90,26 +113,24 @@ export const OfferLetterDocs = async(req ,res)=>{
     })
    }
 }
+export const FreelencerOfferApi = async(req ,res)=>{
+   try{
 
-export const ShareLead = async(req ,res)=>{
-  const {leadId , shareEmp} = req.body;
-   
+     const {userId , content7} = req.body;
 
-   await Lead.updateOne(
-    { _id: leadId },
-    {
-      $addToSet: {
-        LeadOwner: { $each: shareEmp }, 
-      },
-    }
-  );
+       const createletter = await FreelencerOffer.create({user:userId , content:content7});
 
-  return res.status(200).json({
-    status: true,
-    message: "Lead shared successfully.",
-  });
-    
-
+        return res.status(200).json({
+          status:200 , 
+          data: createletter
+        })
+   } catch(error){
+    console.log(error);
+    return res.status(500).json({
+      status:false , 
+      message:"internal server error "
+    })
+   }
 }
 
 export const SaveRelivingLetter = async(req ,res)=>{
@@ -329,50 +350,21 @@ export const GetUserLetter = async( req ,res)=>{
 export const PostQuotationForm = async (req, res) => {
   try {
     const {
-      userId,
-      leadId,
-      quotationNum,
-      customerName,
-      customerReq,
-      mobileNum,
-      quotationDate,
-      validUntil,
-      customerId,
-      companyName,
-      companyAddress,
-      companyGSTIN,
-      companyWebsite,
-      items,
-      content,
+      customerName, customerReq,  quotationDate, introduction , additional , costhead ,timeline , technology, userId , leadId ,isSave
     } = req.body;
 
     const newQuotation = new Quatation({
-      userId,
-      leadId,
-      quotationNum,
-      customerName,
-      customerReq,
-      mobileNum,
-      quotationDate,
-      validUntil,
-      customerId,
-      companyName,
-      companyAddress,
-      companyGSTIN,
-      companyWebsite,
-      items,
-      content,
+      customerName, customerReq,  quotationDate, introduction , additional , costhead ,timeline , technology, userId , leadId , isSave
     });
 
     await newQuotation.save();
 
-    res
-      .status(201)
-      .send({
+    res.status(201).send({
         status: true,
         message: "Quotation saved successfully",
         newQuotation,
       });
+
   } catch (error) {
     console.log("error ", error);
     res.status(500).send({ message: "Error saving quotation", error });
@@ -469,24 +461,29 @@ export const UpdateProposalForm = async (req, res) => {
 export const UpdateQuotationForm = async (req, res) => {
   try {
     const {
-      userId,
-      leadId,
-      quotationNum,
-      customerName,
-      customerReq,
-      mobileNum,
-      quotationDate,
-      validUntil,
-      customerId,
-      companyName,
-      companyAddress,
-      companyGSTIN,
-      companyWebsite,
-      items,
-      content,
+      // userId,
+      // leadId,
+      // quotationNum,
+      // customerName,
+      // customerReq,
+      // mobileNum,
+      // quotationDate,
+      // validUntil,
+      // customerId,
+      // companyName,
+      // companyAddress,
+      // companyGSTIN,
+      // companyWebsite,
+      // items,
+      // content,
+      customerName, customerReq,  quotationDate, introduction , additional , costhead ,timeline , technology, userId 
     } = req.body;
 
     const { quoId } = req.params;
+
+    console.log("v" , quoId);
+    console.log("userId" , userId);
+
 
     // Check if the ID is valid
     if (!quoId) {
@@ -499,21 +496,7 @@ export const UpdateQuotationForm = async (req, res) => {
     const updatedQuotation = await Quatation.findByIdAndUpdate(
       quoId,
       {
-        userId,
-        leadId,
-        quotationNum,
-        customerName,
-        customerReq,
-        mobileNum,
-        quotationDate,
-        validUntil,
-        customerId,
-        companyName,
-        companyAddress,
-        companyGSTIN,
-        companyWebsite,
-        items,
-        content,
+        customerName, customerReq,  quotationDate, introduction , additional , costhead ,timeline , technology, userId 
       },
       { new: true }
     );
@@ -653,9 +636,7 @@ export const GetDesiUser = async (req, res) => {
         "Business Development Manager",
         "Manager",
         "Field Marketing Executive",
-        "Business Development Executive",
-        "ASST. SALES MANAGER",
-        "HR-ADMIN"
+        "Business Development Executive"
       ],
     },
   });
@@ -849,24 +830,35 @@ export const deleteLeads = async (req, res) => {
 export const editLead = async (req, res) => {
   try {
     const {
-      image,
       LeadOwner,
-      leadType,
-      budget,
-      name,
-      Mobile,
+      image,
+      Company,
+      FirstName,
+      LastName,
+      Title,
       Email,
-      date,
-      Street ,
-      City ,
-       State, 
-       ZipCode ,
-        Country ,
-        LeadSource,
-        LeadStatus
+      Phone,
+      Fax,
+      Mobile,
+      Website,
+      LeadSource,
+      NoOfEmployee,
+      Industry,
+      LeadStatus,
+      AnnualRevenue,
+      Rating,
+      EmailOptOut,
+      SkypeID,
+      SecondaryEmail,
+      Twitter,
+      Street,
+      City,
+      State,
+      ZipCode,
+      Country,
+      DescriptionInfo,
+      date
     } = req.body;
-
-   
 
     // Ensure id is passed as a parameter
     const id = req.params.id;
@@ -875,21 +867,34 @@ export const editLead = async (req, res) => {
     const leadDetail = await Lead.findByIdAndUpdate(
       id,
       {
-        image,
         LeadOwner,
-        leadType,
-        budget,
-        name,
-        Mobile,
+        image,
+        Company,
+        FirstName,
+        LastName,
+        Title,
         Email,
-        date,
-        Street ,
-        City ,
-         State, 
-         ZipCode ,
-          Country ,
-          LeadSource,
-          LeadStatus
+        Phone,
+        Fax,
+        Mobile,
+        Website,
+        LeadSource,
+        NoOfEmployee,
+        Industry,
+        LeadStatus,
+        AnnualRevenue,
+        Rating,
+        EmailOptOut,
+        SkypeID,
+        SecondaryEmail,
+        Twitter,
+        Street,
+        City,
+        State,
+        ZipCode,
+        Country,
+        DescriptionInfo,
+        date
       },
       { new: true }
     );
@@ -1165,10 +1170,10 @@ export const GetDesiUser1 = async (req, res) => {
   const users = await User.find({
     designation: {
       $in: [
-        // "CEO",
-        "ASST. SALES MANAGER",
-        "HR-ADMIN",
-        // "Manager",
+        "CEO",
+        "Intern Digital Marketing",
+        "Business Development Manager",
+        "Manager",
       ],
     },
   });
@@ -1178,3 +1183,39 @@ export const GetDesiUser1 = async (req, res) => {
     data: users,
   });
 };
+
+
+
+export const InstaAddLead = async (req ,res)=>{
+
+  const {FirstName  , LastName, Phone , Email} = req.body;
+
+
+   const LeadDetail = await Lead.create({FirstName , Phone , Email , LastName});
+   
+   return res.status(200).json({
+    status:true ,
+    message:"Successfuly Created",
+     })
+
+}
+
+export const GetSaveTempalte  = async(req ,res)=>{
+   try{
+
+    const {leadId} = req.params;
+
+    const resp = await Quatation.find({isSave:true , leadId:leadId});
+
+    return res.status(200).json({
+      status:true , 
+      data: resp
+    })
+
+   } catch(error){
+    return res.status(500).json({
+      status: false , 
+      message:"Internal server error "
+    })
+   }
+}

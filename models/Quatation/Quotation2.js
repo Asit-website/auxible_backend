@@ -2,34 +2,26 @@ import mongoose, { mongo } from "mongoose";
 
 
 const RowSchema = new mongoose.Schema({
-  application: {
+    productName: {
     type: String,
 
   },
-  brand: {
+  description: [{
     type: String,
-  
-  },
-  model: {
+  }],
+  unitPrice: {
     type: String,
  
   },
-  description: {
+  taxRate: {
     type: String,
-  
-  },
-  qty: {
-    type: Number,
-   
-  },
-  unitPrice: {
-    type: Number,
   
   },
   amount: {
     type: Number,
    
   },
+  
 });
 
 const mySchema = new mongoose.Schema({
@@ -48,6 +40,6 @@ const mySchema = new mongoose.Schema({
   
 }, { timestamps: true }); 
 
-const Quatation = mongoose.model("Quatation", mySchema);
+const Quatation2 = mongoose.model("Quatation", mySchema);
 
-export default Quatation;
+export default Quatation2;
